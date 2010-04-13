@@ -1,0 +1,45 @@
+*************************************************************************
+**                                                                     **
+**  RPTINT - Regular Project Tetrahedra with Partial Pre-Integration   **
+**                                                                     **
+**                             AUTHORS File                            **
+**                                                                     **
+*************************************************************************
+
+    RPTINT is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    RPTINT is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see
+    <http://www.gnu.org/licenses/>.
+
+Credits:
+
+    RPTINT Main Code:
+
+	Maximo, Andre (andmax@gmail.com)
+	Marroquim, Ricardo (ricardo.marroquim@gmail.com)
+
+    Contributors:
+
+	Farias, Ricardo (rfarias@gmail.com)
+	Esperanca, Claudio (claudio.esperanca@gmail.com)
+
+    Publication History:
+
+	GPU-Based Cell Projection for Large Structured Data Sets
+	A. Maximo ; R. Marroquim ; R. Farias ; C. Esperança.
+	International Conference on Computer Graphics Theory and Applications.
+	GRAPP 2007 Paper, Barcelona, Spain.
+
+	GPU-Based Cell Projection for Interactive Volume Rendering
+	R. Marroquim ; A. Maximo ; R. Farias ; C. Esperança.
+	Brazilian Symposium on Computer Graphics and Image Processing.
+	SIBGRAPI 2006 Paper, Manaus, AM, Brazil. IEEE Publication.
