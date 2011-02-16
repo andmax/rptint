@@ -117,7 +117,7 @@ static void init(void);
 static void reshapeModelWin(int w, int h);
 static void reshapeTFWin(int w, int h);
 static void idle(void);
-static void glWrite(GLdouble x, GLdouble y, char *str);
+static void glWrite(GLdouble x, GLdouble y, const char *str);
 static bool displayDebugModel(void);
 static void displayDebugTF(void);
 static void displayModelWin(void);
@@ -141,7 +141,9 @@ void init(void)
   vol->createArrays();
 
   vol->resetSelectionBox();
-    
+
+  vol->updateHexaMask();
+
   num_verts = vol->getNumVerts();
   num_tets = vol->getNumTets();
 
@@ -204,9 +206,9 @@ void idle(void)
 
 /// OpenGL Write (global)
 
-void glWrite(GLdouble x, GLdouble y, char *str) {
+void glWrite(GLdouble x, GLdouble y, const char *str) {
   glRasterPos2d(x, y);
-  for (char *s = str; *s; ++s)
+  for (char *s = (char*)str; *s; ++s)
     glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *s);
 }
 
@@ -381,9 +383,9 @@ void displayModelWin(void)
   //--- Update data ---
   if (show_debug)
     sta_sh = glutGet(GLUT_ELAPSED_TIME);
-  
+
   vol->projectBasisHexahedra();
-  
+
   if (show_debug) {
     end_sh = glutGet(GLUT_ELAPSED_TIME);
     update_dt = (end_sh - sta_sh) / 1000.0;	
@@ -1005,6 +1007,8 @@ int main(int argc, char** argv)
   int sta_in=0, end_in=0;
   double init_time;
 
+  glutInit(&argc, argv);
+
   vol = new volume;
 
   if (show_debug)
@@ -1019,8 +1023,8 @@ int main(int argc, char** argv)
     argc--;
   }
 
-  if (argc == 1) { // for commodity...
-    argv[1] = "fuel";
+  if (argc == 1) { // for convenience
+    argv[1] = (char*)"skull";
     argc = 3;
   }
 
@@ -1041,7 +1045,6 @@ int main(int argc, char** argv)
   info_file_name = argv[1];
 
   // initialize opengl
-  glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
   glutInitWindowSize(modelWinWidth, modelWinHeight);
   glutInitWindowPosition(50, 100);

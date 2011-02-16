@@ -58,7 +58,7 @@ Usage:
     Command line: ./rptint 'volume'
 
     RPTINT program searches by default a directory with volume
-    information named: ../tet_offs/.  For example, run it by calling:
+    information named: datasets/.  For example, run it by calling:
 
     $ ./rptint skull
 

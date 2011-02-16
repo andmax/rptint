@@ -37,12 +37,12 @@ extern "C" {
 #ifndef NO_NVIDIA
 
 /// Static local function
-static void errcheck(char * place);
+static void errcheck(const char * place);
 
 /// Error check
 /// @arg place were this functions was called
 
-void errcheck(char * place)
+void errcheck(const char * place)
 {
   static GLenum errCode;
   const GLubyte *errString;
@@ -70,12 +70,12 @@ void volume::updateHexaMask(void)
   GLfloat scalar = 0;
 
   //draw all tetrahedra
-  for(uint z = 0; z < slices; ++z)
-    for(uint y = 0; y < rows; ++y)
-      for(uint x = 0; x < cols; ++x)
+  for(uint z = 0; z < slices-1; ++z)
+    for(uint y = 0; y < cols-1; ++y)
+      for(uint x = 0; x < rows-1; ++x)
 	{
 	  //position of first vertex of hexahedral on scalar buffer
-	  pos = x + y*rows + z*rows*cols;
+		pos = x + y*(rows-1) + z*(rows-1)*(cols-1);
 	  alpha = 0;
 
 	  for (int i = 0; i < 8; ++i)
@@ -497,17 +497,17 @@ void volume::sort(double mask[3], int max, int& beg, int& end, int& step)
 **/
 void volume::sortHexahedron(int *tetOrder)
 {
-  double hexaVerts[4][3] = {
-    {-0.5, 0.5, -0.5},  //vertex 2 of basis hexahedron
-    {0.5, 0.5, 0.5},  //vertex 7 of basis hexahedron
-    {-0.5, -0.5, 0.5},  //vertex 4 of basis hexahedron
-    {0.5, -0.5, -0.5}}; //vertex 1 of basis hexahedron
+  double hexaVerts[4][4] = {
+	  {-0.5, 0.5, -0.5, 1.0},  //vertex 2 of basis hexahedron
+	  {0.5, 0.5, 0.5, 1.0},  //vertex 7 of basis hexahedron
+	  {-0.5, -0.5, 0.5, 1.0},  //vertex 4 of basis hexahedron
+	  {0.5, -0.5, -0.5, 1.0}}; //vertex 1 of basis hexahedron
 
-  double rotatedHexaVerts[4][3] = {
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0},
-    {0, 0, 0}};
+  double rotatedHexaVerts[4][4] = {
+	  {0, 0, 0, 1},
+	  {0, 0, 0, 1},
+	  {0, 0, 0, 1},
+	  {0, 0, 0, 1}};
 
   //rotate basis hexahedron vertices
   for (uint i = 0; i < 4; ++i)
@@ -799,16 +799,14 @@ void volume::draw()
       zend = selectionBox[0][2]-1;
     }
 
-
   GLfloat xOffset = (selectionBox[0][0]+selectionBox[1][0])/2.0;
   GLfloat yOffset = (selectionBox[0][1]+selectionBox[1][1])/2.0;
   GLfloat zOffset = (selectionBox[0][2]+selectionBox[1][2])/2.0;
 
- 
   int tableRow, orderId, vId, tetId;
 
   uint k=0;
-  //  cout << "--- draw --- " << endl;
+   // cout << "--- draw --- " << endl;
   //compute normal and indices arrays
   for (uint i=0; i < 5; i++) 
     {    
@@ -852,17 +850,14 @@ void volume::draw()
       for(GLint x = xbeg; x != xend; x += stepx)
 	{	  
 	  //position of first vertex of hexahedral on scalar buffer
-	  pos = x + y*rows + z*rows*cols;
-
-// 	  bool disc = (!hexaMaskBuffer[pos]);	  
-// 	  if (disc)
-// 	    continue;
+		pos = x + y*(rows-1) + z*(rows-1)*(cols-1);
 
 	  if (!hexaMaskBuffer[pos])
 	    continue;
 
 	  for (int i = 0; i < 4; ++i)
  	    scalars[i] = (scalarBuffer[ pos + hexahedralVertexWalk( i )] - minScalar)*scaleScalar;
+
 	  scalars[4] = scalars[0];
 	  scalars[5] = scalars[1];
 	  scalars[6] = scalars[2];
@@ -907,7 +902,7 @@ void volume::draw()
 		  k += 3;
 		}
 	    }
-
+	  
 //	  if (!debug_setup)
 	    //	    Draw 5 triangle fans
 	  glMultiDrawElements(GL_TRIANGLE_FAN, count,
@@ -921,9 +916,9 @@ void volume::draw()
 	      drawTetrahedron(i, x, y, z, pos);
 	  */
 	}
-//    cout << "fetch time : " << totalFetch / 1000 << endl;
-//    cout << "setup time : " << totalSetup / 1000 << endl;
-//    cout << "draw time : " << totalDraw/ 1000 << endl;
+   // cout << "fetch time : " << totalFetch / 1000 << endl;
+   // cout << "setup time : " << totalSetup / 1000 << endl;
+   // cout << "draw time : " << totalDraw/ 1000 << endl;
 
 #ifndef NO_NVIDIA
 

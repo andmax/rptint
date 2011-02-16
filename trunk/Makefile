@@ -34,7 +34,7 @@ CXX_FLAGS = -Wall -Wno-deprecated $(DEBUG_FLAGS) $(INCLUDES) $(OPT_FLAGS) $(ICPC
 
 LNK_FLAGS = -fPIC $(OPT_FLAGS) $(ICPC_FLAGS)
 
-LIBS =	-lGLee -lglut -lGL -lglslKernel
+LIBS =	-lGLee -lglut -lGL -lGLU -lglslKernel
 
 #-----------------------------------------------------------------------------
 
