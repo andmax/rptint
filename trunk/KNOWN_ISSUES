@@ -1,0 +1,30 @@
+*************************************************************************
+**                                                                     **
+**  RPTINT - Regular Project Tetrahedra with Partial Pre-Integration   **
+**                                                                     **
+**                        KNOWN ISSUES File                            **
+**                                                                     **
+*************************************************************************
+
+    RPTINT is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    RPTINT is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see
+    <http://www.gnu.org/licenses/>.
+
+Issues:
+
+    RPTINT is a research project under development, presenting several
+    known problems.  The software source code available online is a
+    recovered version and, as such, is not the latest revised version.
+    We apologize for the inconvenience, but the RPTINT source code
+    presented here should be used only to get ideas from rather than
+    as a ready-to-run application.
